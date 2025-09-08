@@ -7,50 +7,6 @@ rm(list = ls()) # Limpiar el entorno global
 library(rvest)
 library(httr)
 library(readxl)
-####### TASA DE DESEMPLEO NORMAL
-# 
-# dest_folder <- "Z:/03_Investigaciones_Economicas/2. Monitores/Colombia/Temporales"
-# # URL de la página del DANE donde se publica el archivo
-# page_url <- "https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc/ipc-informacion-tecnica#indices-y-ponderaciones"
-# 
-# # Leer el contenido de la página
-# page <- read_html(page_url)
-# 
-# # Extraer el enlace del archivo Excel
-# links <- page %>%
-#   html_nodes("a") %>%
-#   html_attr("href") %>%
-#   .[grepl("(?i)anex.*\\.xlsx$|gasto.*\\.xlsx$|enfoque.*\\.xlsx$", .)]
-# 
-# # Comprobar si se encontraron enlaces
-# if (length(links) == 0) {
-#   stop("No se encontró el archivo.")
-# }
-# 
-# links
-# 
-# # Función para descargar el archivo
-# download_dane_file <- function(link, dest_file) {
-#   # Completar la URL si es relativa
-#   if (!grepl("^http", link)) {
-#     link <- paste0("https://www.dane.gov.co", link)
-#   }
-#   
-#   # Descargar el archivo
-#   download.file(link, dest_file, mode = "wb")
-# }
-# 
-# 
-# file_names <- sub(".*/(anex-.*?)-[^-]*\\.xlsx$", "\\1", links) 
-# file_names <- gsub("-", "_", file_names)
-# file_names
-# 
-# # Bucle para descargar cada archivo
-# for (i in seq_along(file_names)) {
-#   link <- links[i]
-#   dest_file <- paste0(dest_folder, "/", "DANE_",file_names[i], ".xlsx")
-#   download_dane_file(link, dest_file)
-# }
 
 # Configuración
 dest_folder <- "Z:/03_Investigaciones_Economicas/2. Monitores/Colombia/Temporales"
@@ -62,17 +18,6 @@ download_dane_file <- function(link, dest_file) {
     if (!grepl("^http", link)) {
       link <- paste0("https://www.dane.gov.co", link)
     }
-    
-    # r <- httr::GET(link,
-    #                httr::add_headers(
-    #                  Host = "totoro.banrep.gov.co",
-    #                  `User-Agent` = "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0",
-    #                  Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    #                  `Accept-Language` = "es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3",
-    #                  `Accept-Encoding` = "gzip, deflate",
-    #                  Connection = "keep-alive"
-    #                ))
-    
     r <- httr::GET(link, httr::user_agent("Mozilla/5.0"))
     
     if (httr::status_code(r) == 200) {
