@@ -4,9 +4,20 @@
 cat("\014") # Limpiar la consola
 while(dev.cur() > 1) dev.off() # Limpiar todos los gráficos
 rm(list = ls()) # Limpiar el entorno global
-library(rvest)
-library(httr)
-library(readxl)
+
+# Definir paquetes necesarios para el análisis
+required_packages <- c("rvest", "httr", "readxl", "tidyverse")
+
+# Función personalizada para instalar paquetes faltantes
+install_if_missing <- function(packages) {
+  new_packages <- packages[!(packages %in% installed.packages()[, "Package"])]
+  if (length(new_packages)) install.packages(new_packages)
+}
+
+# Instalar paquetes faltantes y cargar librerías
+install_if_missing(required_packages)
+lapply(required_packages, library, character.only = TRUE)
+
 ####### TASA DE DESEMPLEO NORMAL
 dest_folder <- "Z:/03_Investigaciones_Economicas/2. Monitores/Colombia/Temporales"
 # URL de la página del DANE donde se publica el archivo
@@ -76,9 +87,19 @@ download_dane_files(
 cat("\014") # Limpiar la consola
 while(dev.cur() > 1) dev.off() # Limpiar todos los gráficos
 rm(list = ls()) # Limpiar el entorno global
-library(openxlsx)
-library(readxl)
-library(tidyverse)
+
+# Definir paquetes necesarios para el análisis
+required_packages <- c("openxlsx", "readxl", "tidyverse")
+
+# Función personalizada para instalar paquetes faltantes
+install_if_missing <- function(packages) {
+  new_packages <- packages[!(packages %in% installed.packages()[, "Package"])]
+  if (length(new_packages)) install.packages(new_packages)
+}
+
+# Instalar paquetes faltantes y cargar librerías
+install_if_missing(required_packages)
+lapply(required_packages, library, character.only = TRUE)
 
 input_folder <- "Z:/03_Investigaciones_Economicas/2. Monitores/Colombia/Temporales/"
 
