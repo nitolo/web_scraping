@@ -109,13 +109,6 @@ if not df_ibr.empty:
     print(f"\nTotal de registros IBR: {len(df_ibr)}")
     print("\nColumnas disponibles:", df_ibr.columns.tolist())
 
-print("=== Consultando DTF ===")
-df_dtf = obtener_datos_sdmx(SERIE_DTF)
-if not df_dtf.empty:
-    print(df_dtf.tail())
-    print(f"\nTotal de registros DTF: {len(df_dtf)}")
-    print("\nColumnas disponibles:", df_dtf.columns.tolist())
-
 print("=== Consultando TIB ===")
 df_tib = obtener_datos_sdmx(SERIE_TIB)
 if not df_tib.empty:
@@ -172,3 +165,11 @@ df_tib = df_tib.set_index('fecha')
 df_tpm = df_tpm[['fecha', 'valor']].clean_names()
 df_tpm = df_tpm.rename(columns={'valor': 'Tasa de Política Monetaria'})
 df_tpm = df_tpm.set_index('fecha')
+
+# Exportar a Excel
+ruta_excel = r"Z:\03_Investigaciones_Economicas\12. Automatizaciones\API BanRep\Indicadores Económicos Colombia.xlsx"
+with pd.ExcelWriter(ruta_excel, engine="openpyxl") as writer:
+    df_trm.to_excel(writer, sheet_name="TRM")
+    df_ibr.to_excel(writer, sheet_name="IBR")
+    df_tib.to_excel(writer, sheet_name="TIB")
+    df_tpm.to_excel(writer, sheet_name="TPM")
