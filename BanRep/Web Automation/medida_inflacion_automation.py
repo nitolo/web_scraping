@@ -105,7 +105,8 @@ def ejecutar_descarga(driver: webdriver.Chrome, wait: WebDriverWait) -> None:
     
     # XPATHS (Podrían ser pasados como argumentos si fueran dinámicos, 
     # pero se mantienen aquí por simplicidad al ser constantes para esta web)
-    TITULO_XPATH = "/html/body/div[2]/oracle-dv/div[1]/div/div[1]/div/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[9]/div/table/tbody/tr[1]/td/div/div[3]/div/div/label"
+    #TITULO_XPATH = "/html/body/div[2]/oracle-dv/div[1]/div/div[1]/div/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[9]/div/table/tbody/tr[1]/td/div/div[3]/div/div/label"
+    TITULO_XPATH = "/html/body/div[2]/oracle-dv/div[1]/div/div[1]/div/div/div/div/div/div[2]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[10]/div/table/tbody/tr[1]/td/div/div[3]/div/div/label"
     EXPORTAR_XPATH = "/html/body/div[1]/div/oj-menu/oj-option[5]/a"
     ARCHIVO_XPATH = "/html/body/div[1]/div/oj-menu/oj-option[5]/oj-menu/oj-option[2]/a"
     GUARDAR_XPATH = "/html/body/div[1]/div[2]/oj-dialog/div/div[3]/div/oj-button[1]/button"
@@ -179,11 +180,11 @@ def main():
     """
     
     # --- Parámetros de la Automatización ---
-    URL = "https://suameca.banrep.gov.co/estadisticas-economicas-back/reporte-oac.html?path=%2FEstadisticas_Banco_de_la_Republica%2F1_Precios_e_Inflacion%2F2_Indice_de_precios_al_consumidor%2F2_IPC_base_2018%2F1_IPC_2018_por_ciudad"
+    URL = "https://suameca.banrep.gov.co/estadisticas-economicas-back/reporte-oac.html?path=%2FEstadisticas_Banco_de_la_Republica%2F1_Precios_e_Inflacion%2F9_Medidas_de_inflacion_Clasificacion_BANREP%2F1_Medidas_inflacion_clasificacion_BANREP_Metodologia2020_base2018_canasta_IPC"
     DOWNLOAD_DIR = r"Z:\03_Investigaciones_Economicas\12. Automatizaciones\Web automation BanRep\Sucios"
     
     # --- Archivo a sobrescribir ---
-    ARCHIVO_A_SOBRESCRIBIR = "1_IPC_2018_por_ciudad.csv"  
+    ARCHIVO_A_SOBRESCRIBIR = "1_Medidas_inflacion_clasificacion_BANREP_Metodologia2020_base2018_canasta_IPC.csv"  
     RUTA_COMPLETA_ARCHIVO = os.path.join(DOWNLOAD_DIR, ARCHIVO_A_SOBRESCRIBIR)
 
     driver = None # Inicialización para el bloque finally
