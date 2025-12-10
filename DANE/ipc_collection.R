@@ -45,10 +45,14 @@ download_dane_file <- function(link, dest_file) {
 page <- read_html(page_url)
 
 # Extraer los enlaces de los archivos Excel
+
 links <- page %>%
   html_nodes("a") %>%
   html_attr("href") %>%
-  .[grepl("(?i)anex.*\\.xlsx$|gasto.*\\.xlsx$|enfoque.*\\.xlsx$", .)]
+  .[grepl("(?i)anex.*\\.xlsx$|gasto.*\\.xlsx$|enfoque.*\\.xlsx$", .) &
+      !grepl("anex-IPC-EjReconstruccion", .)]
+
+
 
 # Comprobar si se encontraron enlaces
 if (length(links) == 0) {
